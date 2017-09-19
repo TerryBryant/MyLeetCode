@@ -1,0 +1,47 @@
+Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this in place with constant memory.
+
+For example,
+Given input array nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the new length.
+
+
+
+此题重点在于输入为一个sorted array，没有这个条件就比较麻烦了。我的解决方法是一个个对比，然后删除vector中的元素，如下
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.empty())
+		return 0;
+
+	    vector<int>::iterator it;
+	    for (it = nums.begin(); it != nums.end()-1;)
+	    {
+		    if (*(it + 1) == *it)
+			    it = nums.erase(it);	
+		    else
+			    ++it;
+	    }
+
+	    return (int)nums.size();
+        
+    }
+};
+
+结果只击败了7.76%的用户，后来看了下比较快的算法：
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int N = nums.size(), write_idx = 1;
+        for(int i = 1; i < N; i++) {
+            if(nums[i] == nums[i-1]) continue;
+            nums[write_idx++] = nums[i];
+        }
+        
+        return min(N, write_idx);
+    }
+};
+
+该算法没有调用vector的remove操作，所以速度快得多
