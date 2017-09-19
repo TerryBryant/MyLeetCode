@@ -34,13 +34,19 @@ public:
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int N = nums.size(), write_idx = 1;
-        for(int i = 1; i < N; i++) {
-            if(nums[i] == nums[i-1]) continue;
-            nums[write_idx++] = nums[i];
+        if(nums.size()<2)
+        {
+            return nums.size();
         }
-        
-        return min(N, write_idx);
+        int id=1;
+        for(int i=1;i<nums.size();i++)
+        {
+            if(nums[i]!=nums[i-1])
+            {
+                nums[id++]=nums[i];
+            }
+        }
+        return id;
     }
 };
 
