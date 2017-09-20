@@ -1,0 +1,56 @@
+No.27
+
+Given an array and a value, remove all instances of that value in place and return the new length.
+
+Do not allocate extra space for another array, you must do this in place with constant memory.
+
+The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+
+Example:
+Given input array nums = [3,2,2,3], val = 3
+
+Your function should return length = 2, with the first two elements of nums being 2.
+
+
+此题跟之前的去重题(No.)比较类似，所以我直接拿那一题的代码改了一下：
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        if (nums.size()==0)
+	    {
+		    return 0;
+	    }
+
+	    int id = 0;
+        for (int i = 0; i<nums.size(); i++)
+        {
+            if ( nums[i] != val )
+            {
+                nums[id++] = nums[i];
+            }
+        }
+        return id;
+        }
+};
+
+结果只击败了9.89%的用户。。更快的算法如下：
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        if (nums.empty())
+            return 0;
+        int readIndex = 0;
+        int writeIndex = 0;
+        
+        while(readIndex < nums.size())
+        {
+            if (nums[readIndex++] != val)
+                nums[writeIndex++] = nums[readIndex-1];
+        }
+        return writeIndex;
+    }
+};
+
+
