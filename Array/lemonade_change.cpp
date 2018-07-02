@@ -15,28 +15,28 @@
 
 // 代码
 bool lemonadeChange(vector<int>& bills) {        
-        int pos5 = 0, pos10 = 0;
-        for(size_t i=0; i<bills.size(); i++){
-            if(bills[i] == 5)
-                pos5 ++;
-            else if(bills[i] == 10){
+    int pos5 = 0, pos10 = 0;
+    for(size_t i=0; i<bills.size(); i++){
+        if(bills[i] == 5)
+            pos5 ++;
+        else if(bills[i] == 10){
+            pos5 --;
+            pos10 ++;
+        }                
+        else{
+            if(pos10 > 0){
                 pos5 --;
-                pos10 ++;
-            }                
-            else{
-                if(pos10 > 0){
-                    pos5 --;
-                    pos10 --;
-                }
-                else{
-                    pos5 -= 3;
-                }
+                pos10 --;
             }
+            else{
+                pos5 -= 3;
+            }
+        }
 
             
-            if(pos5 < 0)
-                return false;
-        }
-        
-        return true;
+        if(pos5 < 0)
+            return false;
     }
+
+    return true;
+}
