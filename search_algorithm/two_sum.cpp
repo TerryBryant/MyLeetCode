@@ -2,7 +2,7 @@
 // 给定一个vector<int>，和一个整数val，从vector中找出两个数，使得它们的和为val
 
 // 思路：
-// 此题用map或者set求解，可以得到O(n)的算法，注意map.find(key)，是通过key来查找的
+// 此题用map或者(set求解，错了，set只有一个值)，可以得到O(n)的算法，注意map.find(key)，是通过key来查找的
 
 
 // 代码：
