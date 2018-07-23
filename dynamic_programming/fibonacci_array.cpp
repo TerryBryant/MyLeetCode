@@ -8,7 +8,7 @@ int fibonacci(int N){
     return fibonacci(N - 1) + fibonacci(N - 2);
 }
 
-// 第二中，采用动态规划的递归写法，时间复杂度为O(n)
+// 第二种，采用动态规划的递归写法，时间复杂度为O(n)
 int dynamic_program(int N, vector<int>& memo){
     if(memo[N] != 0) return memo[N];
 
