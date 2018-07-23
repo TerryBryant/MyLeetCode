@@ -23,7 +23,7 @@ int dynamic_program(int N, vector<int>& memo){
     return result;
 }
 
-// 第三种，采用一种叫做bottom up的动态规划算法
+// 第三种，采用一种叫做bottom up的动态规划算法，时间复杂度也为O(n)，但避免了递归
 int fib_bottom_up(int N){
     if((N == 1) || (N == 2)) return 1;
 
