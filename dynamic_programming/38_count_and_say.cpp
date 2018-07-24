@@ -44,3 +44,32 @@ string countAndSay(int n) {
 
     return str[n-1];
 }
+
+
+// 我真傻，真的，我干嘛要把每次的结果保留下来，这里又不涉及重复计算。。
+// 更新代码：
+string countAndSay(int n) {
+    string res = "1";
+    for(int i=1; i<n; i++){
+        char begin = res[0];
+        string tmp = "";
+        int cnt = 1;
+
+        for(int j=1; j<res.size(); j++){
+            if(res[j] == begin)
+                cnt ++;
+            else{
+                tmp += to_string(cnt) + begin; // string和char可以直接相加
+                begin = res[j];
+                cnt = 1;
+            }
+        }
+
+        tmp += to_string(cnt) + begin;
+        tmp += string(1, begin);
+
+        res = tmp;
+    }
+
+    return res;
+}
