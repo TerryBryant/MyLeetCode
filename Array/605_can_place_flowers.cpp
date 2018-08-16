@@ -50,26 +50,15 @@ bool canPlaceFlowers(vector<int>& flowerbed, int n) {
 
 
 
-// 看了下别人的代码，果然有更优雅的方式，如下
+// 看了下别人的代码，果然更优雅，但我看不懂
 bool canPlaceFlowers(vector<int>& flowerbed, int n) {
-    if (n==0) return true;
-    auto sz = flowerbed.size()&(~1);
-    int l = 0;
-    for (int plot=0; plot<sz; plot+=2) {
-        if (l==0 && flowerbed[plot]==0 && flowerbed[plot+1]==0) {
+    flowerbed.insert(flowerbed.begin(),0);
+    flowerbed.push_back(0);
+    for(int i = 1; i < flowerbed.size()-1; i++){
+        if(flowerbed[i-1]+flowerbed[i]+flowerbed[i+1] == 0){
             n--;
-            flowerbed[plot] = 1;
+            i++;
         }
-
-        l = flowerbed[plot+1];
-        if (n==0) return true;
     }
-    if (n==1 && l==0) {
-        if (sz<flowerbed.size()) {
-            if (flowerbed[sz]==0) return true;
-        }
-        else if (flowerbed[sz-2]==0) return true;
-        }        
-    return false;
+    return n <= 0?true:false;
 }
-
