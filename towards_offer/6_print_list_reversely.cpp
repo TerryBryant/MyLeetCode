@@ -1,3 +1,5 @@
+//问题：从尾到头打印链表内容
+//思路：可以借助栈来实现，想到栈，又可以想到递归
 #include<iostream>
 #include<stack>
 
@@ -32,5 +34,3 @@ void PrintListReversingly_Recursively(ListNode* pHead) {
 	}
 }
 
-int main() {
-}
