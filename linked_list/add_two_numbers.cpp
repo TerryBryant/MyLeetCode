@@ -1,8 +1,38 @@
-	//Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-	//Output : 7 -> 0 -> 8
-	//Explanation : 342 + 465 = 807
+//Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+//Output : 7 -> 0 -> 8
+//Explanation : 342 + 465 = 807
+
+// 我自己的解法，写了半天，还是个错的，因为不能处理大整数的情况
+int traverse(ListNode* li){
+    std::vector<int> nums;
+    while(li != nullptr){
+        nums.push_back(li->val);
+        li = li->next;
+    }
+
+    int ret = 0;
+    for(int i=0; i<nums.size(); i++) ret += nums[i] * pow(10, i);
+    return ret;
+}
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    int ans = traverse(l1) + traverse(l2);
+
+    int ans_len = std::to_string(ans).length();
+
+    ListNode* ret = new ListNode(ans % 10);
+    ListNode* head = ret;
+    for(int i=1; i<ans_len; i++){
+        ListNode* newNode = new ListNode(ans / (int)pow(10, i) % 10);
+        head->next = newNode->next;
+        head->next = newNode;
+        head = head->next;
+    }
+
+    return ret;
+}
   
-  // 链表题目，学习大佬们的方法。。
+  // 下面是网上大佬的方法，又简洁又清晰，厉害了
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
     ListNode preHead(0), *p = &preHead;
     int extra = 0;
@@ -15,26 +45,3 @@
     }
     return preHead.next;
 }
-
-
-int traverse(ListNode* li){
-        vector<int> nums;
-        while(li->next != nullptr) nums.push_back(li->val);
-        
-        int ret = 0;
-        for(int i=0; i<nums.size(); i++) ret += pow(10, i);
-        return ret;
-    }
-    
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* ret;
-        int ans = traverse(l1) + traverse(l1);
-        
-        int ans_len = std::to_string(ans).length();
-        for(int i=0; i<ans_len; i++){
-            ListNode* newNode = new ListNode(ans % (ans_len - 1 - i));
-            ret->next = newNode;
-        }
-        
-        return ret;
-    }
