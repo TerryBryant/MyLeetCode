@@ -36,3 +36,59 @@ template <typename T> T CQueue<T>::deleteHead() {
     stack2.pop();
     return head;
 }
+
+
+// 拓展：用两个队列实现一个堆栈
+// 思路：要实现出栈，先将数据压入第一个队列abc，a先入先出，把ab压入第二个队列（压的个数为队列的size减一），剩余c，c出栈及完成了后入先出
+// 要注意的是，压入数据时应压入到一个非空的队列，否则顺序就乱了
+
+
+template <typename T> class CStack{
+public:
+    CStack(void);
+    ~CStack(void);
+
+    void appendTail(const T& node);
+    T deleteHead();
+
+private:
+    std::queue<T> queue1;
+    std::queue<T> queue2;
+};
+
+template <typename T>
+void CStack<T>::appendTail(const T &node) {
+    // 往不为空的队列里面插入数据
+    if(!queue1.empty())
+        queue1.push(node);
+    else
+        queue2.push(node);
+}
+
+template <typename T>
+T CStack<T>::deleteHead() {
+    T ret;
+    if(!queue1.empty()){
+        int num = queue1.size();
+        while (num > 1){
+            queue2.push(queue1.front())
+            queue1.pop();
+            num--;
+        }
+
+        ret = queue1.front();
+        queue1.pop();
+    } else{
+        int num = queue2.size();
+        while (num > 1){
+            queue1.push(queue2.front())
+            queue2.pop();
+            num--;
+        }
+
+        ret = queue2.front();
+        queue1.pop();
+    }
+
+    return ret;
+}
