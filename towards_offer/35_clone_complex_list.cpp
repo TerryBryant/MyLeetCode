@@ -3,6 +3,12 @@
 // 第二步，参考N的兄弟节点S，给N1也创建兄弟节点S1
 // 第三步，整个链表的奇数节点为原始节点，偶数节点即为所求的复制节点，要把两者分开，这一步实在是没看明白，只能说作者太强大
 
+struct ComplexListNode{
+    int m_nValue;
+    ComplexListNode* m_pNext;
+    ComplexListNode* m_pSibling;
+};
+
 // 第一步
 void CloneNodes(ComplexListNode* pHead){
     ComplexListNode* pNode = pHead;
