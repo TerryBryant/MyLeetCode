@@ -16,8 +16,8 @@ int GetTranslationCount(const std::string& number){
             count = 1;
 
         if(i < length - 1){
-            int digit1 = number[i] - '\0';
-            int digit2 = number[i+1] - '\0';
+            int digit1 = number[i] - '0';
+            int digit2 = number[i+1] - '0';
             int converted = digit1 * 10 + digit2;
             if(converted >= 10 && converted <= 25){
                 if(i < length - 2)
