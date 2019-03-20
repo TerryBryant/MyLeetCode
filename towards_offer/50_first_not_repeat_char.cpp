@@ -21,3 +21,40 @@ char FirstNotRepeatingChar(char* pString){
 
     return '\0';
 }
+
+
+// 更新，计算字符流中第一个只出现一次的字符
+class CharStatistics{
+public:
+    CharStatistics() : index(0){
+        for (int i = 0; i < 256; ++i) {
+            occurrence[i] = -1;
+        }
+    }
+
+    void Insert(char ch){
+        if(occurrence[ch] == -1)
+            occurrence[ch] = index;
+        else if (occurrence[ch] >= 0)
+            occurrence[ch] = -2;
+
+        index++;
+    }
+
+    char FirstAppearingOnce(){
+        char ch = '\0';
+        int minIndex = std::numeric_limits<int>::max();
+        for (int i = 0; i < 256; ++i) {
+            if(occurrence[i] >= 0 && occurrence[i] < minIndex){
+                ch = (char)i;
+                minIndex = occurrence[i];
+            }
+        }
+
+        return ch;
+    }
+
+private:
+    int occurrence[256];    // -1表示没发现，-2表示发现多次，>=0表示仅发现一次
+    int index;
+};
