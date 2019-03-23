@@ -42,3 +42,32 @@ void FindNumsAppearOnce(int data[], int length, int* nums1, int* nums2){
             *nums2 ^= data[j];
     }
 }
+
+// 问题2：找到数组中唯一出现一次的数字，数组中其它的数字都出现了三次
+// 思路：此时不能再用异或了，因为三次异或就变成自己了，此时可以考虑位运算，出现三次，那么将相应的位进行累加，肯定可以被3整除
+// 利用这一思路，将整个数组进行累加，得到一个长度为32的数组，再分别对3进行求余，即可得到结果
+
+int FindNumberAppearingOnce3(int numbers[], int length){
+    if(numbers == nullptr || length <= 0)
+        throw std::exception();
+
+    int bitSum[32] = {0};  // 整型一共32位
+    for (int i = 0; i < length; ++i) {
+        int bitMask = 1;
+        for (int j = 31; j >= 0; --j) {     // 高位到低位
+            int bit = numbers[i] & bitMask;
+            if(bit != 0)
+                bitSum[j] += 1;
+            
+            bitMask = bitMask << 1;
+        }
+    }
+
+    int result = 0;
+    for (int i = 0; i < 32; ++i) {
+        result = result << 1;
+        result += bitSum[i] % 3;
+    }
+
+    return result;
+}
