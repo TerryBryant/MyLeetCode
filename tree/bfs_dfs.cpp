@@ -32,10 +32,10 @@ void treeDFS(BinaryTreeNode* root){
         node = nodeStack.top();
         nodeStack.pop();
         cout<<node->m_nValue<<" ";
-
+        
+        if(node->m_pRight)
+            nodeStack.push(node->m_pRight);  //注意这里不要写反了
         if(node->m_pLeft)
             nodeStack.push(node->m_pLeft);
-        if(node->m_pRight)
-            nodeStack.push(node->m_pRight);
     }
 }
